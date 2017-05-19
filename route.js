@@ -13,12 +13,12 @@ $('#next_2').click(function (e) {
 
 function route(urlThis){
     switch (urlThis){
-        case 'valik14.github.io/index.html' :
+        case 'https://valik14.github.io/' :
             history.pushState({}, 'title', "#some1");  
-        case 'valik14.github.io/index.html#some1' :
+        case 'https://valik14.github.io/#some1' :
             some1();
             break;
-        case 'valik14.github.io/index.html#some2' :
+        case 'https://valik14.github.io/#some2' :
             some2();
             break;
         defaul : 
