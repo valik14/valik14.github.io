@@ -90,6 +90,7 @@ footer{
     position: relative;
     flex-wrap: wrap;
     -webkit-flex-wrap: wrap;
+    padding-top: 10px;
 }
 .col3 p{
     font-size: 13px;
@@ -121,8 +122,9 @@ footer{
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    padding: 1.5px 3px;
-    font-size: 15px;
+    padding: 4px;
+    font-size: 17px;
+    vertical-align: middle;
     margin-right: 10px;
     cursor: pointer;
 }
