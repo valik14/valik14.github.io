@@ -127,6 +127,7 @@ footer{
     vertical-align: middle;
     margin-right: 10px;
     cursor: pointer;
+    line-height: 17px;
 }
 .cash_wrap,
 .cash_wrap_minus,
