@@ -1,149 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Общак</title>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="main.css">
     <meta name="viewport" content="width=device-width">
 </head>
 <body>
-<header>
-    <h2 id="header_title">Some title</h2>
-</header>
-<div class="window_init-players">
-    <div class="init-players">
-        <div class="init-player">
-            <input type="text" maxlength="20" class="init-player_input" placeholder="имя 1 игрока" value="">
+<div id="appy">
+    <header>
+        <h2 id="header_title">Общак</h2>
+    </header>
+    <div class="window_init-players" v-show="state === 'init'">
+        <div class="init-players">
+            <div v-for="indx in player">
+                {{indx}}
+            </div>
+            <input type="text"
+                   v-for="index in players"
+                   maxlength="10"
+                   class="init-player_input"
+                   :placeholder="'имя ' + index + ' игрока'"
+                   v-model="player[index]"
+            >
+            <div class="add-player" @click="addPlayer" v-show="players < 10">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </div>
+            <!--<input type="text" maxlength="10" class="init-player_input" placeholder="имя 4 игрока" v-model="player['4']">-->
+            <!--<input type="text" maxlength="10" class="init-player_input" placeholder="имя 5 игрока" v-model="player['5']">-->
+            <!--<input type="text" maxlength="10" class="init-player_input" placeholder="имя 6 игрока" v-model="player['6']">-->
+            <!--<input type="text" maxlength="10" class="init-player_input" placeholder="имя 7 игрока" v-model="player['7']">-->
+            <!--<input type="text" maxlength="10" class="init-player_input" placeholder="имя 8 игрока" v-model="player['8']">-->
+        </div>
+        <!--<div class="add-player">-->
+        <!--<i class="fa fa-plus" aria-hidden="true"></i>-->
+        <!--</div>-->
+        <button class="init-players_next">
+            Начать
+            <i class="fa fa-play" aria-hidden="true"></i>
+        </button>
+        <button id="next_1" type="button" class="start_btn" @click="startGame">Начать</button>
+    </div>
+
+    <!--window_score-->
+    <div class="window_score" v-show="state === 'score'">
+        <div class="row" v-for="(plr, key) in player" v-if="plr"
+             :class="{'row_first' : key == 1, 'row_last' : key == players}">
+            <div class="col1">
+                <span class="name">{{plr}}</span>
+                <i class="fa fa-plus add_cash" aria-hidden="true"></i>
+                <p>
+                </p>
+            </div>
+            <div class="col2">
+                <i class="fa fa-minus" aria-hidden="true"></i>
+                <p></p>
+            </div>
+            <div class="col3">
+                <p class="score_plus">
+                    <span>+ </span>
+                    <span class="score">0</span>
+                </p>
+                <p class="score_minus">
+                    <span>- </span>
+                    <span class="score">0</span>
+                </p>
+                <p class="score_total">
+                    <span class="score">0</span>
+                </p>
+            </div>
         </div>
 
-        <div class="init-player">
-            <input type="text" maxlength="20" class="init-player_input" placeholder="имя 2 игрока" value="">
-        </div>
-        <div class="init-player">
-            <input type="text" maxlength="20" class="init-player_input" placeholder="имя 3 игрока" value="">
-        </div>
-    </div>
-    <div class="add-player">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-    </div>
-    <button class="init-players_next">
-        Начать
-        <i class="fa fa-play" aria-hidden="true"></i>
-    </button>
-    <div id="next_1" style="width: 100px; height: 40px; background: #ea5050; margin-top: 20px;">next_1 play</div>
-</div>
+        <!--<div class="row row_first">-->
+            <!--<div class="col1">-->
+                <!--<span class="name">Валик</span>-->
+                <!--<i class="fa fa-plus add_cash" aria-hidden="true"></i>-->
+                <!--<p>-->
+                <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col2">-->
+                <!--<i class="fa fa-minus" aria-hidden="true"></i>-->
+                <!--<p></p>-->
+            <!--</div>-->
+            <!--<div class="col3">-->
+                <!--<p class="score_plus">-->
+                    <!--<span>+ </span>-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+                <!--<p class="score_minus">-->
+                    <!--<span>- </span>-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+                <!--<p class="score_total">-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col1">-->
+                <!--<span class="name">Рус</span>-->
+                <!--<i class="fa fa-plus add_cash" aria-hidden="true"></i>-->
+                <!--<p></p>-->
+            <!--</div>-->
+            <!--<div class="col2">-->
+                <!--<i class="fa fa-minus" aria-hidden="true"></i>-->
+                <!--<p></p>-->
+            <!--</div>-->
+            <!--<div class="col3">-->
+                <!--<p class="score_plus">-->
+                    <!--<span>+ </span>-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+                <!--<p class="score_minus">-->
+                    <!--<span>- </span>-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+                <!--<p class="score_total">-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row row_last">-->
+            <!--<div class="col1">-->
+                <!--<span class="name">Котn</span>-->
+                <!--<i class="fa fa-plus add_cash" aria-hidden="true"></i>-->
+                <!--<p></p>-->
+            <!--</div>-->
+            <!--<div class="col2">-->
+                <!--<i class="fa fa-minus" aria-hidden="true"></i>-->
+                <!--<p></p>-->
+            <!--</div>-->
+            <!--<div class="col3">-->
+                <!--<p class="score_plus">-->
+                    <!--<span>+ </span>-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+                <!--<p class="score_minus">-->
+                    <!--<span>- </span>-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+                <!--<p class="score_total">-->
+                    <!--<span class="score">0</span>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
 
-<!--window_score-->
-<div class="window_score">
-    <div class="row row_first">
-        <div class="col1">
-            <span class="name">Валик</span>
-            <i class="fa fa-plus add_cash" aria-hidden="true"></i>
-            <p>
-                <span class="mini_cash cash_2">2</span>
-                <span class="mini_cash cash_2">2</span>
-                <span class="mini_cash cash_2">2</span>
-                <span class="mini_cash cash_2">2</span>. 
-                
-              
-               
-              
-                
-               
-                
-            </p>
-        </div>
-        <div class="col2">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-            <p> </p>
-        </div>
-        <div class="col3">
-            <p class="score_plus">
-                <span>+ </span>
-                <span class="score">0</span>
-            </p>
-            <p class="score_minus">
-                <span>- </span>
-                <span class="score">0</span>
-            </p>
-            <p class="score_total">
-                <span class="score">0</span>
-            </p>
-        </div>
+
     </div>
-    <div class="row">
-        <div class="col1">
-            <span class="name">Рус</span>
-            <i class="fa fa-plus add_cash" aria-hidden="true"></i>
-            <p></p>
-        </div>
-        <div class="col2">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-            <p> </p>
-        </div>
-        <div class="col3">
-            <p class="score_plus">
-                <span>+ </span>
-                <span class="score">0</span>
-            </p>
-            <p class="score_minus">
-                <span>- </span>
-                <span class="score">0</span>
-            </p>
-            <p class="score_total">
-                <span class="score">0</span>
-            </p>
-        </div>
-    </div>
-    <div class="row row_last">
-        <div class="col1">
-            <span class="name">Кот</span>
-            <i class="fa fa-plus add_cash" aria-hidden="true"></i>
-            <p></p>
-        </div>
-        <div class="col2">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-            <p> </p>
-        </div>
-        <div class="col3">
-            <p class="score_plus">
-                <span>+ </span>
-                <span class="score">0</span>
-            </p>
-            <p class="score_minus">
-                <span>- </span>
-                <span class="score">0</span>
-            </p>
-            <p class="score_total">
-                <span class="score">0</span>
-            </p>
-        </div>
-    </div>
-    <div class="row row_last">
-        <div class="col1">
-            <span class="name">Котn</span>
-            <i class="fa fa-plus add_cash" aria-hidden="true"></i>
-            <p></p>
-        </div>
-        <div class="col2">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-            <p> </p>
-        </div>
-        <div class="col3">
-            <p class="score_plus">
-                <span>+ </span>
-                <span class="score">0</span>
-            </p>
-            <p class="score_minus">
-                <span>- </span>
-                <span class="score">0</span>
-            </p>
-            <p class="score_total">
-                <span class="score">0</span>
-            </p>
-        </div>
-    </div>
+
+
 
     <div class="cash_wrap">
         <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
@@ -151,9 +157,9 @@
         <div class="cash cash_2">2</div>
         <div class="cash cash_3">3</div>
         <div class="cash cash_4">4</div>
-        <div class="cash cash_5">5</div>
-        <div class="cash cash_6">6</div>
-        <div class="cash cash_7">7</div>
+        <!--<div class="cash cash_5">5</div>-->
+        <!--<div class="cash cash_6">6</div>-->
+        <!--<div class="cash cash_7">7</div>-->
         <div class="cash cash_last">Послед</div>
     </div>
     <div class="cash_wrap_minus">
@@ -166,29 +172,23 @@
         <div class="cash cash_2">2</div>
         <div class="cash cash_3">3</div>
         <div class="cash cash_4">4</div>
-        <div class="cash cash_5">5</div>
-        <div class="cash cash_6">6</div>
-        <div class="cash cash_7">7</div>
+        <!--<div class="cash cash_5">5</div>-->
+        <!--<div class="cash cash_6">6</div>-->
+        <!--<div class="cash cash_7">7</div>-->
     </div>
+    <!--window_score end-->
+
+    <footer>
+        <div class="footer_button">Some button</div>
+    </footer>
+
+
 </div>
-<!--window_score end-->
-
-<footer>
-    <div class="footer_button">Some button</div>
-</footer>
-
-
-
-
-
-
-
-
-
-
-<div id="next_2" style="width: 100px; height: 40px; background: #000; margin-top: 20px; color: #ffffff;" data-tooltip="some">next_2 go to init_players</div>
+<!--<div id="next_2" style="width: 100px; height: 40px; background: #000; margin-top: 20px; color: #ffffff;" data-tooltip="some">next_2 go to init_players</div>-->
 <script src="jquery-3.2.0.min.js"></script>
-<script src="route.js"></script> 
-<script src="main.js"></script> 
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<!--<script src="route.js"></script> -->
+<script src="main.js"></script>
 </body>
 </html>
