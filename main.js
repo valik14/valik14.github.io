@@ -265,7 +265,7 @@ var app = new Vue({
             this.state = 'score';
             setTimeout(()=>{
                 this.startGameJQery();
-            }, 1000);
+            }, 2000);
         },
         addPlayer() {
             this.players++
@@ -275,7 +275,7 @@ var app = new Vue({
                 cashWrapMinius = $('.cash_wrap_minus');
 
             /*add plus*/
-            $('.add_cash').click(function (e) {
+            $('.add_cash').bind('click',function (e) {
                 $('body').append(cashWrap);
                 var this_plus = $(this);
                 $('.cash_wrap').show();
@@ -346,7 +346,7 @@ var app = new Vue({
             }
 
             /*add minus*/
-            $('.fa-minus').click(function (e) {
+            $('.fa-minus').bind('click', function (e) {
                 $('body').append(cashWrapMinius);
                 var this_minus = $(this);
                 $(this).hide();
