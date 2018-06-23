@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    window.onbeforeunload = function(){ return 'Стой!'; }
+
     var cashWrap = $('.cash_wrap'),
         cashWrapMinius = $('.cash_wrap_minus');
 
