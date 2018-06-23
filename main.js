@@ -263,7 +263,9 @@ var app = new Vue({
     methods: {
         startGame() {
             this.state = 'score';
-            this.startGameJQery();
+            setTimeout(()=>{
+                this.startGameJQery();
+            }, 1000);
         },
         addPlayer() {
             this.players++
